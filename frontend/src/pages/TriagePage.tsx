@@ -1,14 +1,32 @@
 import { useEffect, useId, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { ArrowIcon, ChipIcon, ClockIcon, FileIcon, TokensIcon } from '../components/icons'
 import { ConfidenceMeter, ErrorBox, Field, Pill, PriorityBadge, Spinner } from '../components/ui'
+import { usePageTitle } from '../lib/usePageTitle'
 import { api, ApiError, type Health, type Sample, type TriageResponse } from '../lib/api'
 import { DEMO_REASON_LABEL, formatMs, formatNumber } from '../lib/format'
 
-const SENTIMENT_LABEL: Record<string, string> = {
-  positive: '🙂 Positive',
-  neutral: '😐 Neutral',
-  frustrated: '😟 Frustrated',
-  angry: '😠 Angry',
+const SENTIMENT: Record<string, { label: string; dot: string }> = {
+  positive: { label: 'Positive', dot: 'bg-accent' },
+  neutral: { label: 'Neutral', dot: 'bg-p4' },
+  frustrated: { label: 'Frustrated', dot: 'bg-p3' },
+  angry: { label: 'Angry', dot: 'bg-p1' },
 }
+
+const STEPS = [
+  {
+    title: 'Classify',
+    body: 'Category, impact × urgency, priority P1–P4, L1/L2 level and sentiment, as validated JSON.',
+  },
+  {
+    title: 'Retrieve',
+    body: 'BM25 finds the 3 most relevant sections in the 21-article help desk knowledge base.',
+  },
+  {
+    title: 'Draft',
+    body: 'A reply in the language of the ticket that cites the articles it used. You review it.',
+  },
+]
 
 function Samples({
   samples,
@@ -145,7 +163,12 @@ function Result({ result }: { result: TriageResponse }) {
               {c.impact} × {c.urgency}
             </Field>
             <Field label="Support level">{c.level}</Field>
-            <Field label="Sentiment">{SENTIMENT_LABEL[c.sentiment]}</Field>
+            <Field label="Sentiment">
+              <span className="inline-flex items-center gap-1.5">
+                <span className={`h-2 w-2 rounded-full ${SENTIMENT[c.sentiment].dot}`} />
+                {SENTIMENT[c.sentiment].label}
+              </span>
+            </Field>
             <Field label="Confidence">
               <ConfidenceMeter value={c.confidence} />
             </Field>
@@ -214,20 +237,30 @@ function Result({ result }: { result: TriageResponse }) {
         <ReplyEditor key={result.reply} initial={result.reply} language={c.language} />
       )}
 
-      <p className="flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted">
-        <span>
-          ⏱ {formatMs(result.latency_ms)}
+      <p className="flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-muted">
+        <span className="inline-flex items-center gap-1.5" title="Response time">
+          <ClockIcon />
+          {formatMs(result.latency_ms)}
           {result.mode === 'demo' && c ? ' (recorded run)' : ''}
         </span>
         {result.usage && (
-          <span>
-            🔢 {formatNumber(result.usage.total_tokens)} tokens (
+          <span className="inline-flex items-center gap-1.5" title="Tokens used">
+            <TokensIcon />
+            {formatNumber(result.usage.total_tokens)} tokens (
             {formatNumber(result.usage.prompt_tokens)} in /{' '}
             {formatNumber(result.usage.completion_tokens)} out)
           </span>
         )}
-        {result.model && <span>🤖 {result.model}</span>}
-        <span>📝 prompt {result.prompt_version}</span>
+        {result.model && (
+          <span className="inline-flex items-center gap-1.5" title="Model">
+            <ChipIcon />
+            {result.model}
+          </span>
+        )}
+        <span className="inline-flex items-center gap-1.5" title="Prompt version">
+          <FileIcon />
+          prompt {result.prompt_version}
+        </span>
       </p>
     </div>
   )
@@ -256,6 +289,7 @@ function ResultSkeleton() {
 }
 
 export default function TriagePage({ health }: { health: Health | null }) {
+  usePageTitle('Triage')
   const [samples, setSamples] = useState<Sample[] | null>(null)
   const [text, setText] = useState('')
   const [result, setResult] = useState<TriageResponse | null>(null)
@@ -383,30 +417,33 @@ export default function TriagePage({ health }: { health: Health | null }) {
         {loading && <ResultSkeleton />}
         {!loading && result && <Result result={result} />}
         {!loading && !result && !error && (
-          <div className="card flex h-full min-h-72 flex-col items-center justify-center p-10 text-center">
-            <svg viewBox="0 0 48 48" className="h-12 w-12 text-line" aria-hidden="true">
-              <rect
-                x="6"
-                y="8"
-                width="36"
-                height="32"
-                rx="6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-              />
-              <path
-                d="M14 18h20M14 25h14M14 32h8"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-            </svg>
-            <p className="mt-4 font-medium">No ticket triaged yet</p>
-            <p className="mt-1 max-w-sm text-sm text-muted">
-              Pick a sample or paste your own ticket. The classification, KB articles and draft
-              reply appear here.
-            </p>
+          <div className="card p-6 sm:p-8">
+            <p className="eyebrow">How it works</p>
+            <h2 className="mt-1 text-xl font-semibold tracking-tight">
+              From raw ticket to a reviewed reply
+            </h2>
+            <ol className="mt-6 space-y-5">
+              {STEPS.map((step, i) => (
+                <li key={step.title} className="flex gap-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft font-mono text-sm font-medium text-accent-ink">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="font-medium">{step.title}</p>
+                    <p className="mt-0.5 text-sm leading-relaxed text-ink-2">{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5 text-sm">
+              <span className="text-muted">Pick a sample ticket to see it in action.</span>
+              <Link
+                to="/evaluation"
+                className="inline-flex items-center gap-1.5 font-medium text-accent-ink hover:underline"
+              >
+                See how accurate it is <ArrowIcon />
+              </Link>
+            </div>
           </div>
         )}
       </div>

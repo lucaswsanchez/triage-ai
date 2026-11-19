@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import ConfusionMatrix from '../components/ConfusionMatrix'
 import { ErrorBox, Pill, PriorityBadge } from '../components/ui'
+import { usePageTitle } from '../lib/usePageTitle'
 import { api, ApiError, type EvalResults } from '../lib/api'
 import { formatMs, formatNumber, percent } from '../lib/format'
 import { ERROR_ANALYSIS } from './evalNotes'
@@ -34,6 +35,7 @@ function Section({
 }
 
 export default function EvaluationPage() {
+  usePageTitle('Evaluation')
   const [data, setData] = useState<EvalResults | null>(null)
   const [error, setError] = useState<string | null>(null)
 

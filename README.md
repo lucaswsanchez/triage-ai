@@ -46,19 +46,15 @@
 
 ```mermaid
 flowchart LR
-  A([Support agent]) -->|ticket text| W[React SPA<br/>Vercel]
-  W -->|POST /api/triage| API[FastAPI<br/>Render]
-  API --> G{Cost guard<br/>key? rate limit?<br/>daily budget?}
-  G -- no --> D[Demo mode<br/>precomputed samples<br/>or retrieval only]
-  G -- yes --> R[BM25 retriever<br/>21 KB articles<br/>section chunks]
-  R -->|top 3 articles| P[Prompt v1<br/>system + few-shot<br/>ticket in delimiters]
-  P --> L[LLMProvider<br/>DeepSeek via OpenAI SDK<br/>JSON mode]
-  L --> V[Pydantic validation<br/>1 retry if invalid]
-  V --> Q[Priority = impact x urgency<br/>drop unknown citations]
-  Q -->|classification + articles + reply| W
+  A([Support agent]) --> W[React app<br/>Vercel]
+  W -->|POST /api/triage| G{Cost guard}
+  G -->|no key or<br/>limit reached| D[Demo mode<br/>precomputed results]
+  G -->|allowed| R[BM25 retriever<br/>top 3 sections]
+  KB[(helpdesk-kb<br/>21 articles)] -.-> R
+  R --> L[LLM call<br/>prompt v1, JSON mode]
+  L --> V[Pydantic validation<br/>priority = impact x urgency]
+  V -->|classification<br/>articles, reply| W
   D --> W
-  KB[(helpdesk-kb<br/>Markdown + front matter)] -.copied into data/kb.-> R
-  E[[eval.run<br/>50 labeled tickets]] -.results.json.-> API
 ```
 
 ```text
