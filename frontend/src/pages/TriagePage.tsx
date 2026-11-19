@@ -370,7 +370,7 @@ export default function TriagePage({ health }: { health: Health | null }) {
             id="ticket"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            rows={9}
+            rows={7}
             placeholder="e.g. Since this morning Outlook says 'Disconnected' and I'm not receiving emails. Webmail works…"
             aria-describedby="ticket-help"
             className="w-full resize-y rounded-xl border border-line bg-card p-4 leading-relaxed shadow-sm outline-none placeholder:text-muted/70 focus:border-accent focus:ring-2 focus:ring-accent/20"
@@ -417,7 +417,7 @@ export default function TriagePage({ health }: { health: Health | null }) {
         {loading && <ResultSkeleton />}
         {!loading && result && <Result result={result} />}
         {!loading && !result && !error && (
-          <div className="card p-6 sm:p-8">
+          <div className="card flex h-full flex-col p-6 sm:p-8">
             <p className="eyebrow">How it works</p>
             <h2 className="mt-1 text-xl font-semibold tracking-tight">
               From raw ticket to a reviewed reply
@@ -435,7 +435,28 @@ export default function TriagePage({ health }: { health: Health | null }) {
                 </li>
               ))}
             </ol>
-            <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5 text-sm">
+            <div className="flex flex-1 flex-col justify-center py-7">
+              <figure
+                className="rounded-xl border border-line bg-paper/60 p-4"
+                aria-label="Example output"
+              >
+                <figcaption className="eyebrow">Example output</figcaption>
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+                  <span className="font-semibold">Security</span>
+                  <PriorityBadge priority="P2" />
+                </div>
+                <p className="mt-1 text-sm text-ink-2">
+                  Credentials entered on a fake Microsoft page, MFA prompt approved.
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                  <Pill>Low × High</Pill>
+                  <Pill>L2</Pill>
+                  <Pill tone="accent">KB-018 cited</Pill>
+                  <Pill tone="accent">KB-001 cited</Pill>
+                </div>
+              </figure>
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5 text-sm">
               <span className="text-muted">Pick a sample ticket to see it in action.</span>
               <Link
                 to="/evaluation"
