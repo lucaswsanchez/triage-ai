@@ -26,7 +26,7 @@ function Section({
   children: React.ReactNode
 }) {
   return (
-    <section className="card p-5">
+    <section className="card min-w-0 p-5">
       <h2 className="font-semibold">{title}</h2>
       {subtitle && <p className="mt-0.5 text-sm text-muted">{subtitle}</p>}
       <div className="mt-4">{children}</div>
@@ -98,7 +98,7 @@ export default function EvaluationPage() {
         </div>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {c && (
           <>
             <Stat
@@ -133,7 +133,7 @@ export default function EvaluationPage() {
       </div>
 
       {c && (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Stat label="Level (L1/L2)" value={percent(c.level_accuracy)} />
           <Stat label="Reply language" value={percent(c.language_accuracy)} />
           <Stat label="Cited the right article" value={percent(c.citation_accuracy)} />
@@ -156,7 +156,7 @@ export default function EvaluationPage() {
       )}
 
       {c && (
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <Section
             title="Category confusion matrix"
             subtitle="Green diagonal = correct, red = mistakes"

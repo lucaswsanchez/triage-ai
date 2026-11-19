@@ -339,7 +339,7 @@ export default function TriagePage({ health }: { health: Health | null }) {
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
       <section aria-labelledby="triage-title" className="lg:sticky lg:top-24 lg:self-start">
         <p className="eyebrow">AI help desk assistant</p>
         <h1 id="triage-title" className="mt-1 text-3xl font-semibold tracking-tight sm:text-4xl">
