@@ -1,0 +1,17 @@
+[project]
+name = "triage-ai"
+version = "1.0.0"
+description = "AI help desk assistant: ticket triage, BM25 RAG and cited reply drafts."
+requires-python = ">=3.12"
+license = { text = "MIT" }
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
