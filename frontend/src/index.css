@@ -1,1 +1,80 @@
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --color-paper: #f6f5f1;
+  --color-card: #ffffff;
+  --color-ink: #17191f;
+  --color-ink-2: #3c414d;
+  --color-muted: #5f6573;
+  --color-line: #e3e1da;
+  --color-accent: #0e6b62;
+  --color-accent-soft: #e2f1ee;
+  --color-accent-ink: #0a4f48;
+  --color-demo: #8a5a00;
+  --color-demo-soft: #fdf1d8;
+
+  --color-p1: #b42318;
+  --color-p1-soft: #fde8e6;
+  --color-p2: #c2410c;
+  --color-p2-soft: #fdecdf;
+  --color-p3: #8a6100;
+  --color-p3-soft: #fbf1d3;
+  --color-p4: #475467;
+  --color-p4-soft: #eceef2;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eeece6 0%, #f8f7f3 50%, #eeece6 100%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
