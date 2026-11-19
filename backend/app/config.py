@@ -1,5 +1,6 @@
 """Application settings loaded from environment variables."""
 
+import json
 from functools import lru_cache
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -14,6 +15,9 @@ class Settings(BaseSettings):
     llm_max_tokens: int = 700
     llm_temperature: float = 0.2
     llm_timeout_seconds: float = 30.0
+    # Extra provider-specific body. DeepSeek enables "thinking" by default; triage does not need it.
+    llm_extra_body: str = '{"thinking": {"type": "disabled"}}'
+    daily_llm_budget: int = 300
 
     rate_limit_requests: int = 10
     rate_limit_window_seconds: int = 3600
@@ -26,6 +30,14 @@ class Settings(BaseSettings):
     @property
     def llm_enabled(self) -> bool:
         return bool(self.llm_api_key.strip())
+
+    @property
+    def llm_extra_body_dict(self) -> dict:
+        try:
+            value = json.loads(self.llm_extra_body or "{}")
+        except json.JSONDecodeError:
+            return {}
+        return value if isinstance(value, dict) else {}
 
     @property
     def cors_origin_list(self) -> list[str]:
