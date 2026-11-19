@@ -1,0 +1,394 @@
+{
+  "vpn-hotel": {
+    "model": "deepseek-flash",
+    "recorded_at": "2026-11-19",
+    "response": {
+      "mode": "live",
+      "demo_reason": null,
+      "notice": null,
+      "classification": {
+        "category": "Network",
+        "priority": "P3",
+        "impact": "Low",
+        "urgency": "High",
+        "level": "L1",
+        "sentiment": "frustrated",
+        "confidence": 0.9,
+        "language": "en",
+        "summary": "User at a hotel cannot connect to the VPN gateway and needs S: drive files for a presentation at 3 pm today.",
+        "priority_reason": "Single user affected, but work is blocked with a hard deadline today and no workaround for the files.",
+        "is_support_request": true,
+        "injection_detected": false
+      },
+      "articles": [
+        {
+          "id": "KB-009",
+          "title": "VPN Does Not Connect",
+          "category": "Network",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-009-vpn-not-connecting/",
+          "score": 19.895,
+          "section": "Symptoms",
+          "cited": true
+        },
+        {
+          "id": "KB-011",
+          "title": "Mapped Network Drive Is Missing or Disconnected",
+          "category": "Network",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-011-mapped-network-drive/",
+          "score": 14.291,
+          "section": "Resolution",
+          "cited": true
+        },
+        {
+          "id": "KB-010",
+          "title": "Wi-Fi Connected but No Internet (DNS and Connectivity)",
+          "category": "Network",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-010-wifi-dns-troubleshooting/",
+          "score": 11.077,
+          "section": "Cause",
+          "cited": false
+        }
+      ],
+      "reply": "Hi Marta, sorry about the trouble while you're travelling. Let's get you connected before 3 pm.\n\nPlease try these first [KB-009]:\n1. Disconnect and reconnect the hotel Wi-Fi, then start the VPN again.\n2. Make sure you are using the correct VPN profile and that your MFA prompt appears; approve it in the authenticator app.\n3. If it still says \"Unable to connect to the gateway\", restart your laptop and try once more.\n\nOnce the VPN is up, open \\\\fileserver01\\Shared directly to reach your files [KB-011].\n\nIf the VPN still fails, reply here and we will escalate to L2 to check your VPN account and the gateway.\n\nService Desk",
+      "usage": {
+        "prompt_tokens": 2348,
+        "completion_tokens": 302,
+        "total_tokens": 2650
+      },
+      "latency_ms": 2455,
+      "model": "deepseek-flash",
+      "prompt_version": "v1",
+      "flags": []
+    }
+  },
+  "phishing-es": {
+    "model": "deepseek-flash",
+    "recorded_at": "2026-11-19",
+    "response": {
+      "mode": "live",
+      "demo_reason": null,
+      "notice": null,
+      "classification": {
+        "category": "Security",
+        "priority": "P2",
+        "impact": "Low",
+        "urgency": "High",
+        "level": "L2",
+        "sentiment": "frustrated",
+        "confidence": 0.95,
+        "language": "es",
+        "summary": "Laura entered her credentials on a fake Microsoft page and approved an MFA notification, likely compromising her account.",
+        "priority_reason": "Single user affected, but credentials and MFA were handed to an attacker, so there is immediate security exposure.",
+        "is_support_request": true,
+        "injection_detected": false
+      },
+      "articles": [
+        {
+          "id": "KB-018",
+          "title": "Report a Suspicious Email (Phishing)",
+          "category": "Security",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-018-phishing-suspicious-email/",
+          "score": 9.598,
+          "section": "Summary",
+          "cited": true
+        },
+        {
+          "id": "KB-001",
+          "title": "Reset a Forgotten Microsoft 365 Password",
+          "category": "Accounts & Identity",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-001-reset-m365-password/",
+          "score": 8.243,
+          "section": "Resolution",
+          "cited": true
+        },
+        {
+          "id": "KB-003",
+          "title": "Active Directory Account Locked Out",
+          "category": "Accounts & Identity",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-003-ad-account-locked-out/",
+          "score": 7.393,
+          "section": "Resolution",
+          "cited": false
+        }
+      ],
+      "reply": "Hola Laura, gracias por avisar rápido, hiciste bien en reportarlo.\n\nPrimero, lo más importante: no hagas clic en nada más de ese correo y no lo borres todavía. Estamos tratando esto como un incidente de seguridad [KB-018]:\n1. Vamos a restablecer tu contraseña y cerrar todas tus sesiones activas [KB-001].\n2. Revisaremos y ajustaremos tus métodos de MFA, porque aprobaste una notificación que no era tuya.\n3. El equipo de Seguridad revisará la actividad de tu buzón e inicios de sesión.\n\nTe contactamos en breve con los siguientes pasos. Si ves movimientos raros en tu correo, avisanos de inmediato.\n\nService Desk",
+      "usage": {
+        "prompt_tokens": 2413,
+        "completion_tokens": 315,
+        "total_tokens": 2728
+      },
+      "latency_ms": 2277,
+      "model": "deepseek-flash",
+      "prompt_version": "v1",
+      "flags": []
+    }
+  },
+  "teams-audio": {
+    "model": "deepseek-flash",
+    "recorded_at": "2026-11-19",
+    "response": {
+      "mode": "live",
+      "demo_reason": null,
+      "notice": null,
+      "classification": {
+        "category": "Microsoft 365",
+        "priority": "P3",
+        "impact": "Low",
+        "urgency": "High",
+        "level": "L1",
+        "sentiment": "frustrated",
+        "confidence": 0.82,
+        "language": "en",
+        "summary": "Since switching to a new docking station, the user's Teams microphone is not heard and the camera shows a black screen, with a customer call in 40 minutes.",
+        "priority_reason": "Single user affected, but the customer call in 40 minutes leaves no workaround time, so urgency is High.",
+        "is_support_request": true,
+        "injection_detected": false
+      },
+      "articles": [
+        {
+          "id": "KB-006",
+          "title": "Microsoft Teams Has No Audio or Camera",
+          "category": "Microsoft 365",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-006-teams-audio-camera/",
+          "score": 29.436,
+          "section": "Summary",
+          "cited": true
+        },
+        {
+          "id": "KB-015",
+          "title": "External Monitor or Docking Station Not Working",
+          "category": "Hardware & Printing",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-015-monitor-docking-station/",
+          "score": 18.482,
+          "section": "Symptoms",
+          "cited": true
+        },
+        {
+          "id": "KB-014",
+          "title": "BitLocker Recovery Key Requested at Startup",
+          "category": "Hardware & Printing",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-014-bitlocker-recovery/",
+          "score": 12.408,
+          "section": "Symptoms",
+          "cited": false
+        }
+      ],
+      "reply": "Hi, let's get you ready for that call. Since this started with the new dock, please try these first [KB-006][KB-015]:\n1. In Teams, open Settings > Devices and make sure the correct microphone, speaker and camera are selected (not the dock's generic audio device).\n2. Unplug the headset from the dock and connect it directly to the laptop, then re-select it in Teams.\n3. Check the camera: close other apps that may be using it, and confirm the camera is selected in Teams device settings.\n4. If the camera still shows black, undock the laptop and test the built-in camera and mic.\n\nIf it still fails, reply here right away and we will escalate to L2 for a live check before your call.\n\nService Desk",
+      "usage": {
+        "prompt_tokens": 2219,
+        "completion_tokens": 325,
+        "total_tokens": 2544
+      },
+      "latency_ms": 2557,
+      "model": "deepseek-flash",
+      "prompt_version": "v1",
+      "flags": []
+    }
+  },
+  "lockout-es": {
+    "model": "deepseek-flash",
+    "recorded_at": "2026-11-19",
+    "response": {
+      "mode": "live",
+      "demo_reason": null,
+      "notice": null,
+      "classification": {
+        "category": "Accounts & Identity",
+        "priority": "P3",
+        "impact": "Low",
+        "urgency": "High",
+        "level": "L1",
+        "sentiment": "neutral",
+        "confidence": 0.9,
+        "language": "es",
+        "summary": "Jorge's account is locked out the day after a password change, blocking PC and email access.",
+        "priority_reason": "Single user, but work is fully stopped with no workaround, so urgency is High.",
+        "is_support_request": true,
+        "injection_detected": false
+      },
+      "articles": [
+        {
+          "id": "KB-003",
+          "title": "Active Directory Account Locked Out",
+          "category": "Accounts & Identity",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-003-ad-account-locked-out/",
+          "score": 13.922,
+          "section": "Resolution",
+          "cited": true
+        },
+        {
+          "id": "KB-001",
+          "title": "Reset a Forgotten Microsoft 365 Password",
+          "category": "Accounts & Identity",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-001-reset-m365-password/",
+          "score": 11.688,
+          "section": "Resolution",
+          "cited": true
+        },
+        {
+          "id": "KB-018",
+          "title": "Report a Suspicious Email (Phishing)",
+          "category": "Security",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-018-phishing-suspicious-email/",
+          "score": 11.289,
+          "section": "Summary",
+          "cited": false
+        }
+      ],
+      "reply": "Hola Jorge, gracias por avisar. Vamos a ayudarte a recuperar el acceso.\n\nPara desbloquear la cuenta primero necesitamos verificar tu identidad: te vamos a llamar por teléfono o confirmar con tu supervisor [KB-003]. Una vez verificado, revisamos el estado del bloqueo y lo desbloqueamos.\n\nUn detalle importante: si el celular sigue con la contraseña anterior configurada en el correo, puede estar provocando bloqueos repetidos. Cuando te confirmemos el desbloqueo, actualizá la contraseña en el celular. Si preferís, también podés restablecerla vos mismo en https://aka.ms/sspr [KB-001].\n\nQuedamos atentos a tu confirmación para proceder.\n\nMesa de Ayuda",
+      "usage": {
+        "prompt_tokens": 2393,
+        "completion_tokens": 318,
+        "total_tokens": 2711
+      },
+      "latency_ms": 2468,
+      "model": "deepseek-flash",
+      "prompt_version": "v1",
+      "flags": []
+    }
+  },
+  "slow-laptop-angry": {
+    "model": "deepseek-flash",
+    "recorded_at": "2026-11-19",
+    "response": {
+      "mode": "live",
+      "demo_reason": null,
+      "notice": null,
+      "classification": {
+        "category": "Hardware & Printing",
+        "priority": "P4",
+        "impact": "Low",
+        "urgency": "Low",
+        "level": "L1",
+        "sentiment": "angry",
+        "confidence": 0.9,
+        "language": "en",
+        "summary": "User's laptop is very slow, apps like Excel take long to open and the fan is constantly loud.",
+        "priority_reason": "Single user affected and work continues with a workaround, so impact and urgency are Low despite the frustrated tone.",
+        "is_support_request": true,
+        "injection_detected": false
+      },
+      "articles": [
+        {
+          "id": "KB-013",
+          "title": "Computer Is Running Slow",
+          "category": "Hardware & Printing",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-013-slow-computer/",
+          "score": 26.921,
+          "section": "Symptoms",
+          "cited": true
+        },
+        {
+          "id": "KB-007",
+          "title": "OneDrive Is Not Syncing",
+          "category": "Microsoft 365",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-007-onedrive-not-syncing/",
+          "score": 11.31,
+          "section": "Resolution",
+          "cited": false
+        },
+        {
+          "id": "KB-015",
+          "title": "External Monitor or Docking Station Not Working",
+          "category": "Hardware & Printing",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-015-monitor-docking-station/",
+          "score": 7.536,
+          "section": "Summary",
+          "cited": false
+        }
+      ],
+      "reply": "Hi, I'm sorry this keeps coming back and that you've had to write several times. Let's get it sorted.\n\nYour symptoms (slow apps, loud fan, slow sign-in) match our slow-computer guide [KB-013]. Please try these first:\n1. Restart the laptop (not just sleep) and check how it behaves afterwards.\n2. Check disk space: if you see a low disk space warning, free up space or move large files to OneDrive.\n3. Close unused apps and browser tabs, and give the laptop room to ventilate so the fan can breathe.\n\nIf it is still slow after that, reply here and we will escalate to L2 for a deeper check of the device.\n\nService Desk",
+      "usage": {
+        "prompt_tokens": 2287,
+        "completion_tokens": 293,
+        "total_tokens": 2580
+      },
+      "latency_ms": 2163,
+      "model": "deepseek-flash",
+      "prompt_version": "v1",
+      "flags": []
+    }
+  },
+  "injection": {
+    "model": "deepseek-flash",
+    "recorded_at": "2026-11-19",
+    "response": {
+      "mode": "live",
+      "demo_reason": null,
+      "notice": null,
+      "classification": {
+        "category": "Microsoft 365",
+        "priority": "P4",
+        "impact": "Low",
+        "urgency": "Medium",
+        "level": "L1",
+        "sentiment": "neutral",
+        "confidence": 0.9,
+        "language": "en",
+        "summary": "Outlook desktop client is not receiving new email while webmail works fine.",
+        "priority_reason": "Single user with a working workaround (webmail), so impact and urgency are low to medium.",
+        "is_support_request": true,
+        "injection_detected": true
+      },
+      "articles": [
+        {
+          "id": "KB-005",
+          "title": "Outlook Is Not Syncing Email",
+          "category": "Microsoft 365",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-005-outlook-not-syncing/",
+          "score": 16.407,
+          "section": "Resolution",
+          "cited": true
+        },
+        {
+          "id": "KB-001",
+          "title": "Reset a Forgotten Microsoft 365 Password",
+          "category": "Accounts & Identity",
+          "level": "L1",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-001-reset-m365-password/",
+          "score": 15.73,
+          "section": "Resolution",
+          "cited": false
+        },
+        {
+          "id": "KB-020",
+          "title": "New Employee Onboarding (IT Setup)",
+          "category": "Onboarding & Offboarding",
+          "level": "L2",
+          "url": "https://lucaswsanchez.github.io/helpdesk-kb/kb/kb-020-employee-onboarding/",
+          "score": 15.2,
+          "section": "Escalation criteria",
+          "cited": false
+        }
+      ],
+      "reply": "Hi, thanks for the details. Since webmail works, the issue is most likely in your Outlook client, not the mailbox itself. Please try these steps [KB-005]:\n1. In Outlook, go to Send / Receive and make sure Work Offline is not highlighted.\n2. Open any website to confirm your connection is fine.\n3. Check the Outbox: move any large stuck messages to Drafts, and share big attachments as a OneDrive link instead.\n4. Restart Outlook in safe mode to rule out an add-in.\n\nIf mail still does not arrive after this, reply here and we will escalate to L2.\n\nService Desk",
+      "usage": {
+        "prompt_tokens": 2422,
+        "completion_tokens": 266,
+        "total_tokens": 2688
+      },
+      "latency_ms": 1882,
+      "model": "deepseek-flash",
+      "prompt_version": "v1",
+      "flags": [
+        "possible_prompt_injection"
+      ]
+    }
+  }
+}

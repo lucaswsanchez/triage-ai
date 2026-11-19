@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Cost protection: per-IP rate limit, global daily budget, input length limit and bounded `max_tokens`.
 - Evaluation dataset of 50 hand-labeled tickets and `python -m eval.run` (accuracy, confusion matrices, hit rate@k, failures).
 - React + Vite + TypeScript + Tailwind frontend with Triage, Evaluation and About pages.
+- First full evaluation run (`deepseek-flash`, prompt v1) and precomputed demo results for the 6 sample tickets.
+- Deep link `/?sample=<id>` to open and triage a sample ticket.
 - GitHub Actions CI (ruff, pytest, oxlint, prettier, vitest, build), Render blueprint, Vercel config, Dockerfiles and docker-compose.
 
 ### Fixed

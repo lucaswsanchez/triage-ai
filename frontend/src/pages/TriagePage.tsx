@@ -269,8 +269,18 @@ export default function TriagePage({ health }: { health: Health | null }) {
   useEffect(() => {
     api
       .samples()
-      .then(setSamples)
+      .then((list) => {
+        setSamples(list)
+        // Deep link: /?sample=<id> loads and triages a sample ticket.
+        const wanted = new URLSearchParams(window.location.search).get('sample')
+        const sample = list.find((s) => s.id === wanted)
+        if (sample) {
+          setText(sample.text)
+          void run(sample.text)
+        }
+      })
       .catch(() => setSamples([]))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const run = async (value = text) => {

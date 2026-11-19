@@ -146,10 +146,9 @@ export class ApiError extends Error {
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let res: Response
   try {
-    res = await fetch(`${BASE}${path}`, {
-      ...init,
-      headers: { 'Content-Type': 'application/json', ...init?.headers },
-    })
+    // Only send Content-Type with a body: simple GETs then skip the CORS preflight.
+    const headers = init?.body ? { 'Content-Type': 'application/json' } : undefined
+    res = await fetch(`${BASE}${path}`, { ...init, headers })
   } catch {
     throw new ApiError('Cannot reach the API. The server may be waking up, try again.', 0)
   }
