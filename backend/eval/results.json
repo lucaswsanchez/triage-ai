@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-11-19T19:55:32+00:00",
+  "mode": "retrieval_only",
+  "model": null,
+  "prompt_version": "v1",
+  "dataset": {
+    "tickets": 50,
+    "by_language": {
+      "en": 37,
+      "es": 13
+    },
+    "by_category": {
+      "Accounts & Identity": 8,
+      "Microsoft 365": 8,
+      "Network": 7,
+      "Hardware & Printing": 8,
+      "Software": 5,
+      "Security": 6,
+      "Onboarding & Offboarding": 4,
+      "Other": 4
+    },
+    "by_priority": {
+      "P1": 1,
+      "P2": 9,
+      "P3": 14,
+      "P4": 26
+    }
+  },
+  "retrieval": {
+    "labeled_tickets": 46,
+    "hit_rate_at_1": 0.913,
+    "hit_rate_at_3": 1.0,
+    "mrr_at_3": 0.9493,
+    "hit_rate_at_3_by_language": {
+      "en": {
+        "hits": 34,
+        "total": 34,
+        "rate": 1.0
+      },
+      "es": {
+        "hits": 12,
+        "total": 12,
+        "rate": 1.0
+      }
+    },
+    "misses": [],
+    "baseline_category_accuracy": 0.86,
+    "without_glossary": {
+      "hit_rate_at_1": 0.7826,
+      "hit_rate_at_3": 0.9348,
+      "hit_rate_at_3_by_language": {
+        "en": {
+          "hits": 34,
+          "total": 34,
+          "rate": 1.0
+        },
+        "es": {
+          "hits": 9,
+          "total": 12,
+          "rate": 0.75
+        }
+      }
+    }
+  }
+}

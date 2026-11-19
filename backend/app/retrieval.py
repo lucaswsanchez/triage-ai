@@ -108,12 +108,30 @@ def _stem(token: str) -> str:
     return token
 
 
-def tokenize(text: str) -> list[str]:
+_SPANISH_HINTS = frozenset(
+    "el la los las un una de del en con por para que no mi me es esta estoy hola gracias "
+    "pero ya hay se lo le muy necesito tengo puedo anda cuando desde".split()
+)
+
+
+def looks_spanish(text: str) -> bool:
+    """Cheap language guess: at least two common Spanish function words."""
+    return sum(t in _SPANISH_HINTS for t in _TOKEN.findall(_fold(text))) >= 2
+
+
+def tokenize(text: str, glossary: dict[str, str] | None = None) -> list[str]:
+    """Tokenize, drop stopwords, expand glossary terms and stem.
+
+    `glossary=None` applies the Spanish glossary only when the text looks Spanish, so English
+    words such as "mail" or "red" are never rewritten.
+    """
+    if glossary is None:
+        glossary = GLOSSARY if looks_spanish(text) else {}
     tokens: list[str] = []
     for raw in _TOKEN.findall(_fold(text)):
         if raw in STOPWORDS:
             continue
-        expansion = GLOSSARY.get(raw)
+        expansion = glossary.get(raw)
         words = expansion.split() if expansion else [raw]
         tokens.extend(_stem(w) for w in words)
     return tokens
@@ -134,7 +152,8 @@ class Retriever(Protocol):
 class BM25Retriever:
     """BM25 over section-level chunks; scores are aggregated per article (max chunk score)."""
 
-    def __init__(self, articles: list[Article]) -> None:
+    def __init__(self, articles: list[Article], use_glossary: bool = True) -> None:
+        self._use_glossary = use_glossary
         self._articles = {a.id: a for a in articles}
         self._chunks: list[Chunk] = []
         corpus: list[list[str]] = []
@@ -143,7 +162,10 @@ class BM25Retriever:
             for chunk in article.chunks:
                 self._chunks.append(chunk)
                 # Title and tags are repeated in every chunk so each section keeps its context.
-                corpus.append(tokenize(f"{header} {header} {chunk.section} {chunk.text}"))
+                corpus.append(
+                    # The KB is English: never apply the Spanish glossary to it.
+                    tokenize(f"{header} {header} {chunk.section} {chunk.text}", glossary={})
+                )
         self._bm25 = BM25Okapi(corpus)
 
     @property
@@ -151,7 +173,7 @@ class BM25Retriever:
         return self._articles
 
     def search(self, query: str, top_k: int = 3) -> list[RetrievedArticle]:
-        tokens = tokenize(query)
+        tokens = tokenize(query, None if self._use_glossary else {})
         if not tokens:
             return []
         scores = self._bm25.get_scores(tokens)
