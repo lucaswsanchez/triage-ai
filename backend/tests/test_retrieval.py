@@ -61,6 +61,12 @@ def test_all_kb_articles_load():
     assert all(a.chunks for a in articles)
 
 
+def test_glossary_is_not_applied_to_english_text():
+    assert "email" not in tokenize("They will mail the laptop back")
+    assert "network" not in tokenize("OneDrive shows a red X")
+    assert "network" in tokenize("No tengo red en la oficina desde la mañana")
+
+
 def test_tokenize_folds_accents_and_translates_spanish():
     tokens = tokenize("Olvidé mi contraseña y la impresora no imprime")
     assert "password" in tokens
