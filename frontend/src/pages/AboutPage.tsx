@@ -84,7 +84,7 @@ export default function AboutPage({ health }: { health: Health | null }) {
 
       <section>
         <h2 className="mb-3 font-semibold">Technical decisions</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {DECISIONS.map((d) => (
             <article key={d.title} className="card p-4">
               <h3 className="font-medium">{d.title}</h3>
@@ -94,7 +94,7 @@ export default function AboutPage({ health }: { health: Health | null }) {
         </div>
       </section>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <section className="card p-5">
           <h2 className="font-semibold">Limitations</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-ink-2">
