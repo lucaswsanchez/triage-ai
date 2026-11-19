@@ -29,6 +29,25 @@ The script writes `results.json`, which the API serves at `GET /api/eval` and th
 - **Classification** (full run only): category accuracy, priority accuracy (exact and within one level), level and language accuracy, citation accuracy (did the model cite the labeled article?), confusion matrices for category and priority, failed examples, latency and tokens.
 - **Prompt injection cases**: the 3 cases in `prompts/injection_cases.jsonl`, checked against their expectations.
 
+## Results (run of 2026-11-19, `deepseek-flash`, prompt v1)
+
+| Metric | Result |
+|---|---|
+| Category accuracy | **100%** (50/50) |
+| Priority accuracy (exact) | **78%** (39/50) |
+| Priority within one level | 100% |
+| Support level (L1/L2) | 94% |
+| Reply language | 100% |
+| Cited the labeled article | 100% |
+| Retrieval hit@3 / hit@1 / MRR@3 | 100% / 91.3% / 0.95 |
+| Retrieval-only baseline category accuracy | 86% |
+| Prompt injection cases | 3/3 passed |
+| JSON retries / provider errors | 0 / 0 |
+| Mean latency / p95 | 2.1 s / 2.4 s |
+| Tokens | 128,872 total, 2,577 per ticket |
+
+All 11 failures are priority errors off by one level: same-day deadlines rated as Medium urgency (4), group size at the Medium/High impact boundary (3) and over-escalation (4). The full analysis is on the Evaluation page.
+
 ## Honest caveats
 
 - **Small, self-written dataset.** 50 tickets written by the same person who wrote the prompt and the glossary. They are realistic but cleaner than real tickets (no signatures, threads or typos-heavy text). Treat the numbers as a sanity check, not a benchmark.

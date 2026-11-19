@@ -130,3 +130,18 @@ def test_demo_serves_precomputed_sample_result():
     assert body["mode"] == "demo"
     assert body["classification"]["category"] == "Network"
     assert "precomputed" in body["notice"]
+
+
+def test_cors_allows_configured_origin_even_with_trailing_slash():
+    settings = make_settings(cors_origins="https://triage-ai.example.app/")
+    client = TestClient(create_app(settings=settings))
+    res = client.options(
+        "/api/triage",
+        headers={
+            "Origin": "https://triage-ai.example.app",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "content-type",
+        },
+    )
+    assert res.status_code == 200
+    assert res.headers["access-control-allow-origin"] == "https://triage-ai.example.app"
