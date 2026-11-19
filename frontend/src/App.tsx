@@ -6,6 +6,7 @@ import TriagePage from './pages/TriagePage'
 
 const EvaluationPage = lazy(() => import('./pages/EvaluationPage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 
 const NAV = [
   { to: '/', label: 'Triage' },
@@ -96,7 +97,7 @@ export default function App() {
             <Route path="/" element={<TriagePage health={health} />} />
             <Route path="/evaluation" element={<EvaluationPage />} />
             <Route path="/about" element={<AboutPage health={health} />} />
-            <Route path="*" element={<TriagePage health={health} />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </main>
@@ -116,6 +117,12 @@ export default function App() {
               href="https://github.com/lucaswsanchez/triage-ai"
             >
               Source code
+            </a>
+            <a
+              className="underline hover:text-ink"
+              href="https://www.linkedin.com/in/lucaswsanchez/"
+            >
+              LinkedIn
             </a>
             <a
               className="underline hover:text-ink"
